@@ -34,7 +34,7 @@ AKKPlayerCharacter::AKKPlayerCharacter()
 
 void AKKPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	checkf(InputConfigDataAsset, TEXT("Forgot to assign a valid data asset as input config"));
+	checkf(InputConfigDataAsset, TEXT("입력 설정 데이터 에셋이 누락되었습니다."));
 	ULocalPlayer* LocalPlayer = GetController<AKKPlayerController>()->GetLocalPlayer();
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem =
@@ -42,14 +42,17 @@ void AKKPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 	check(Subsystem);
 
+	// 입력 매핑 컨텍스트 추가
 	Subsystem->AddMappingContext(InputConfigDataAsset->DefaultMappingContext, 0);
+
 	UKKInputComponent* KKInputComponent = CastChecked<UKKInputComponent>(PlayerInputComponent);
 
+	// 액션 바인딩
 	KKInputComponent->BindNativeInputAction(InputConfigDataAsset, KKGameplayTags::InputTag_Move,
-	                                        ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
+	                                        ETriggerEvent::Triggered, this, &Input_Move);
 
 	KKInputComponent->BindNativeInputAction(InputConfigDataAsset, KKGameplayTags::InputTag_Look,
-	                                        ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
+	                                        ETriggerEvent::Triggered, this, &Input_Look);
 }
 
 void AKKPlayerCharacter::BeginPlay()
