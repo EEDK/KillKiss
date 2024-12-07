@@ -44,4 +44,4 @@
 
 ## Docs
 
-[Docs링크](https://killkissdocs-545b3b.gitlab.io/killkiss.html)
+[Docs링크](https://killkissdocs-4ba02b.gitlab.io/killkiss.html)
