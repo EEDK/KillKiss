@@ -5,13 +5,9 @@
 
 AKKCharacterBase::AKKCharacterBase()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 }
 
-void AKKCharacterBase::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
 
 void AKKCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {

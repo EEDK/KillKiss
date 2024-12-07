@@ -14,7 +14,6 @@ class KILLKISS_API AKKCharacterBase : public ACharacter
 
 public:
 	AKKCharacterBase();
-	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
