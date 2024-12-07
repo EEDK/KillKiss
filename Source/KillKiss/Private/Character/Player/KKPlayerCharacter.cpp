@@ -49,10 +49,12 @@ void AKKPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 	// 액션 바인딩
 	KKInputComponent->BindNativeInputAction(InputConfigDataAsset, KKGameplayTags::InputTag_Move,
-	                                        ETriggerEvent::Triggered, this, &Input_Move);
+	                                        ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
 
 	KKInputComponent->BindNativeInputAction(InputConfigDataAsset, KKGameplayTags::InputTag_Look,
-	                                        ETriggerEvent::Triggered, this, &Input_Look);
+	                                        ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
+	KKInputComponent->BindNativeInputAction(InputConfigDataAsset, KKGameplayTags::InputTag_Jump,
+	                                        ETriggerEvent::Triggered, this, &ThisClass::Input_Jump);
 }
 
 void AKKPlayerCharacter::BeginPlay()
@@ -88,4 +90,9 @@ void AKKPlayerCharacter::Input_Look(const FInputActionValue& InputActionValue)
 	{
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AKKPlayerCharacter::Input_Jump(const FInputActionValue& InputActionValue)
+{
+	Jump();
 }

@@ -21,6 +21,11 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	UInputAction* InputAction;
+
+	FKKInputActionConfig()
+	{
+		InputAction = nullptr;
+	}
 };
 
 /**
