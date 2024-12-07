@@ -6,6 +6,8 @@
 #include "Character/KKCharacterBase.h"
 #include "KKPlayerCharacter.generated.h"
 
+struct FInputActionValue;
+class UDataAsset_InputConfig;
 class USpringArmComponent;
 class UCameraComponent;
 
@@ -22,11 +24,23 @@ public:
 	AKKPlayerCharacter();
 
 protected:
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<USpringArmComponent> CameraBoom;
+#pragma region Components
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+	USpringArmComponent* CameraBoom;
 
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UCameraComponent> FollowCamera;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+	UCameraComponent* FollowCamera;
+#pragma endregion
+
+#pragma region Inputs
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess = "true"))
+	UDataAsset_InputConfig* InputConfigDataAsset;
+
+	void Input_Move(const FInputActionValue& InputActionValue);
+	void Input_Look(const FInputActionValue& InputActionValue);
+#pragma endregion
 };
