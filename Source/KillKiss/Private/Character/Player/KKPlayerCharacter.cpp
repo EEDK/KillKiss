@@ -9,6 +9,7 @@
 #include "Controllers/KKPlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "KKDebugHelper.h"
 #include "Components/Input/KKInputComponent.h"
 #include "DataAssets/DataAsset_InputConfig.h"
 #include "KKGameplayTags.h"
