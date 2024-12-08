@@ -3,37 +3,36 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
-#include "KKCharacterBase.generated.h"
-
+#include "GameFramework/PlayerState.h"
+#include "KKPlayerState.generated.h"
 
 class UAttributeSet;
-
+class UAbilitySystemComponent;
+/**
+ * 
+ */
 UCLASS()
-class KILLKISS_API AKKCharacterBase : public ACharacter, public IAbilitySystemInterface
+class KILLKISS_API AKKPlayerState : public APlayerState, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
 public:
-	AKKCharacterBase();
+	AKKPlayerState();
 
 protected:
-	virtual void BeginPlay() override;
-
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Abilities")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Abilities")
 	TObjectPtr<UAttributeSet> AttributeSet;
 
-	virtual void InitAbilityActorInfo();
 public:
 	// ~Begin IAbilitySystemInterface Interface.
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	// ~End IAbilitySystemInterface Interface
 
-	FORCEINLINE UAttributeSet* GetAttributeSet() const
+	UAttributeSet* GetAttributeSet() const
 	{
 		return AttributeSet;
 	}

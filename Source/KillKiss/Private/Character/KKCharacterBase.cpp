@@ -9,12 +9,16 @@ AKKCharacterBase::AKKCharacterBase()
 }
 
 
-void AKKCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-}
-
 void AKKCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void AKKCharacterBase::InitAbilityActorInfo()
+{
+}
+
+UAbilitySystemComponent* AKKCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
 }

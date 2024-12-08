@@ -3,6 +3,7 @@
 
 #include "Character/Player/KKPlayerCharacter.h"
 
+#include "AbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Controllers/KKPlayerController.h"
@@ -11,6 +12,8 @@
 #include "Components/Input/KKInputComponent.h"
 #include "DataAssets/DataAsset_InputConfig.h"
 #include "KKGameplayTags.h"
+#include "AbilitySystem/KKAbilitySystemComponent.h"
+#include "Character/Player/KKPlayerState.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 AKKPlayerCharacter::AKKPlayerCharacter()
@@ -67,6 +70,12 @@ void AKKPlayerCharacter::BeginPlay()
 	Super::BeginPlay();
 }
 
+void AKKPlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	InitAbilityActorInfo();
+}
+
 void AKKPlayerCharacter::Input_Move(const FInputActionValue& InputActionValue)
 {
 	const FVector2D MovementVector = InputActionValue.Get<FVector2D>();
@@ -100,4 +109,14 @@ void AKKPlayerCharacter::Input_Look(const FInputActionValue& InputActionValue)
 void AKKPlayerCharacter::Input_Jump(const FInputActionValue& InputActionValue)
 {
 	Jump();
+}
+
+void AKKPlayerCharacter::InitAbilityActorInfo()
+{
+	AKKPlayerState* KKPlayerState = GetPlayerState<AKKPlayerState>();
+	check(KKPlayerState);
+	KKPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(KKPlayerState, this);
+
+	AbilitySystemComponent = KKPlayerState->GetAbilitySystemComponent();
+	AttributeSet = KKPlayerState->GetAttributeSet();
 }
