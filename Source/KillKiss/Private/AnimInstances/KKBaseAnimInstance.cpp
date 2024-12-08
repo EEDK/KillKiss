@@ -31,4 +31,5 @@ void UKKBaseAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 	bHasAcceleration = OwningMovementComponent->GetCurrentAcceleration().SizeSquared2D() > 0.f;
 	LocomotionDirection = UKismetAnimationLibrary::CalculateDirection(OwningCharacter->GetVelocity(),
 	                                                                  OwningCharacter->GetActorRotation());
+	bIsFalling = OwningMovementComponent->IsFalling();
 }

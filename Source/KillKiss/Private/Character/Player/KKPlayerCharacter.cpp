@@ -11,6 +11,7 @@
 #include "Components/Input/KKInputComponent.h"
 #include "DataAssets/DataAsset_InputConfig.h"
 #include "KKGameplayTags.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 AKKPlayerCharacter::AKKPlayerCharacter()
 {
@@ -19,7 +20,6 @@ AKKPlayerCharacter::AKKPlayerCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
-
 
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(GetRootComponent());
@@ -30,6 +30,11 @@ AKKPlayerCharacter::AKKPlayerCharacter()
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
+
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 500.f, 0.f);
+	GetCharacterMovement()->MaxWalkSpeed = 400.f;
+	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 }
 
 void AKKPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
