@@ -42,8 +42,10 @@ struct FWidgetControllerParams
 /**
  * 
  */
-class KILLKISS_API KKWidgetController : public UObject
+UCLASS()
+class KILLKISS_API UKKWidgetController : public UObject
 {
+	GENERATED_BODY()
 public:
 	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParms);

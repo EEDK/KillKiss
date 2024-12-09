@@ -3,7 +3,7 @@
 
 #include "UI/WidgetController/KKWidgetController.h"
 
-void KKWidgetController::SetWidgetControllerParams(const FWidgetControllerParams& WCParms)
+void UKKWidgetController::SetWidgetControllerParams(const FWidgetControllerParams& WCParms)
 {
 	PlayerController = WCParms.PlayerController;
 	PlayerState = WCParms.PlayerState;
@@ -11,10 +11,10 @@ void KKWidgetController::SetWidgetControllerParams(const FWidgetControllerParams
 	AttributeSet = WCParms.AttributeSet;
 }
 
-void KKWidgetController::BroadcastInitialValues()
+void UKKWidgetController::BroadcastInitialValues()
 {
 }
 
-void KKWidgetController::BindCallbacksToDependencies()
+void UKKWidgetController::BindCallbacksToDependencies()
 {
 }
