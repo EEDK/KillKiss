@@ -120,4 +120,18 @@ void AKKPlayerCharacter::InitAbilityActorInfo()
 
 	AbilitySystemComponent = KKPlayerState->GetAbilitySystemComponent();
 	AttributeSet = KKPlayerState->GetAttributeSet();
+
+	InitPrimaryAttributes();
+}
+
+void AKKPlayerCharacter::InitPrimaryAttributes() const
+{
+	UAbilitySystemComponent* TargetASC = GetAbilitySystemComponent();
+
+	check(DefaultPrimaryAttributes);
+
+	const FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
+	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(
+		DefaultPrimaryAttributes, 1.f, EffectContextHandle);
+	TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
 }

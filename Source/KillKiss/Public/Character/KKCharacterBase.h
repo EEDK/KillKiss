@@ -7,7 +7,7 @@
 #include "AbilitySystemInterface.h"
 #include "KKCharacterBase.generated.h"
 
-
+class UGameplayEffect;
 class UAttributeSet;
 
 UCLASS()
@@ -27,7 +27,11 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Abilities")
 	TObjectPtr<UAttributeSet> AttributeSet;
 
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
+	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes;
+
 	virtual void InitAbilityActorInfo();
+
 public:
 	// ~Begin IAbilitySystemInterface Interface.
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;

@@ -12,8 +12,6 @@
 	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
-
-
 /**
  * 
  */
@@ -25,21 +23,38 @@ class KILLKISS_API UKKAttributeSet : public UAttributeSet
 public:
 	UKKAttributeSet();
 
-	UPROPERTY(BlueprintReadOnly, Category = "Health")
+	//~Begin Vital Attribute
+	UPROPERTY(BlueprintReadOnly, Category = "Vital")
 	FGameplayAttributeData CurrentHealth;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, CurrentHealth)
 
-	UPROPERTY(BlueprintReadOnly, Category = "Health")
+	UPROPERTY(BlueprintReadOnly, Category = "Vital")
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, MaxHealth)
 
-	UPROPERTY(BlueprintReadOnly, Category = "Mana")
+	UPROPERTY(BlueprintReadOnly, Category = "Vital")
 	FGameplayAttributeData CurrentMana;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, CurrentMana)
 
-	UPROPERTY(BlueprintReadOnly, Category = "Mana")
+	UPROPERTY(BlueprintReadOnly, Category = "Vital")
 	FGameplayAttributeData MaxMana;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, MaxMana)
+	//~End Vital Attribute
+
+
+	//~Begin Primary Attribute
+	UPROPERTY(BlueprintReadOnly, Category = "Attribute")
+	FGameplayAttributeData Strength;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, Strength)
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attribute")
+	FGameplayAttributeData Intelligence;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, Intelligence)
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attribute")
+	FGameplayAttributeData Luck;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, Luck)
+	//~End Primary Attribute
 
 protected:
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;

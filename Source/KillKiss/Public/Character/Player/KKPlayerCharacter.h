@@ -46,5 +46,7 @@ private:
 	void Input_Look(const FInputActionValue& InputActionValue);
 	void Input_Jump(const FInputActionValue& InputActionValue);
 #pragma endregion
+
 	virtual void InitAbilityActorInfo() override;
+	void InitPrimaryAttributes() const;
 };
