@@ -22,8 +22,8 @@ UOverlayWidgetController* AKKHUD::GetOverlayWidgetController(const FWidgetContro
 
 void AKKHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
 {
-	checkf(OverlayWidgetClass, TEXT("OverlayWidget Uninitialize, Set BP_AuraHUD"));
-	checkf(OverlayWidgetControllerClass, TEXT("OverlayWidget Uninitialize, Set BP_AuraHUD"));
+	checkf(OverlayWidgetClass, TEXT("OverlayWidget Uninitialize, Set BP_KKHUD"));
+	checkf(OverlayWidgetControllerClass, TEXT("OverlayWidget Uninitialize, Set BP_KKHUD"));
 
 	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass.Get());
 	OverlayWidget = Cast<UKKUserWidget>(Widget);

@@ -16,6 +16,7 @@
 #include "AbilitySystem/KKAbilitySystemComponent.h"
 #include "Character/Player/KKPlayerState.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "UI/KKHUD.h"
 
 AKKPlayerCharacter::AKKPlayerCharacter()
 {
@@ -122,6 +123,14 @@ void AKKPlayerCharacter::InitAbilityActorInfo()
 	AttributeSet = KKPlayerState->GetAttributeSet();
 
 	InitPrimaryAttributes();
+
+	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
+	{
+		if (AKKHUD* KKHUD = Cast<AKKHUD>(PlayerController->GetHUD()))
+		{
+			KKHUD->InitOverlay(PlayerController, KKPlayerState, GetAbilitySystemComponent(), GetAttributeSet());
+		}
+	}
 }
 
 void AKKPlayerCharacter::InitPrimaryAttributes() const

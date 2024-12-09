@@ -6,7 +6,7 @@
 #include "KKWidgetController.h"
 #include "OverlayWidgetController.generated.h"
 
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnAttributeChanged, const float& /*Attribute*/);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChanged, float, NewValue /*Attribute*/);
 
 /**
  * 
@@ -17,9 +17,16 @@ class KILLKISS_API UOverlayWidgetController : public UKKWidgetController
 	GENERATED_BODY()
 
 public:
+	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FOnAttributeChanged OnHealthChanged;
+
+	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FOnAttributeChanged OnMaxHealthChanged;
+
+	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FOnAttributeChanged OnManaChanged;
+
+	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FOnAttributeChanged OnMaxManaChanged;
 
 	virtual void BroadcastInitialValues() override;
