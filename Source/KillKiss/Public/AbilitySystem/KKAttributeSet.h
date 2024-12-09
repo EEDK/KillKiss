@@ -81,6 +81,10 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attribute")
 	FGameplayAttributeData Luck;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, Luck)
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attribute")
+	FGameplayAttributeData DefensePower;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, DefensePower)
 	//~End Primary Attribute
 
 protected:
