@@ -8,6 +8,14 @@
 
 class UGameplayEffect;
 
+UENUM(BlueprintType)
+enum class EEffectApplicationPolicy : uint8
+{
+	DoNotApply,
+	ApplyOnOverlap,
+	ApplyOnEndOverlap
+};
+
 UCLASS()
 class KILLKISS_API AEffectActor : public AActor
 {
@@ -22,12 +30,18 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effect")
 	TSubclassOf<UGameplayEffect> InstantGameplayEffect;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effect")
+	EEffectApplicationPolicy EffectApplicationPolicy;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effect")
+	bool bDestroy = false;
+
+private:
 	UFUNCTION(BlueprintCallable)
 	void OnOverlap(AActor* TargetActor);
 
 	UFUNCTION(BlueprintCallable)
 	void OnEndOverlap(AActor* TargetActor);
 
-private:
-	void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass);
+	void ApplyEffectToTarget(AActor* TargetActor, const TSubclassOf<UGameplayEffect>& GameplayEffectClass);
 };
