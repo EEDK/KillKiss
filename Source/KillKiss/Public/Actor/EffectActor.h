@@ -31,7 +31,14 @@ protected:
 	TSubclassOf<UGameplayEffect> InstantGameplayEffect;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effect")
-	EEffectApplicationPolicy EffectApplicationPolicy;
+	EEffectApplicationPolicy InstantEffectApplicationPolicy;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effect")
+	TSubclassOf<UGameplayEffect> DurationGameplayEffect;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effect")
+	EEffectApplicationPolicy DurationEffectApplicationPolicy;
+
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effect")
 	bool bDestroy = false;
