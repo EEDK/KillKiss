@@ -54,38 +54,72 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Vital")
 	FGameplayAttributeData CurrentHealth;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, CurrentHealth)
-
-	UPROPERTY(BlueprintReadOnly, Category = "Vital")
-	FGameplayAttributeData MaxHealth;
-	ATTRIBUTE_ACCESSORS(UKKAttributeSet, MaxHealth)
-
+	
 	UPROPERTY(BlueprintReadOnly, Category = "Vital")
 	FGameplayAttributeData CurrentMana;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, CurrentMana)
-
-	UPROPERTY(BlueprintReadOnly, Category = "Vital")
-	FGameplayAttributeData MaxMana;
-	ATTRIBUTE_ACCESSORS(UKKAttributeSet, MaxMana)
 	//~End Vital Attribute
 
 
 	//~Begin Primary Attribute
-	UPROPERTY(BlueprintReadOnly, Category = "Attribute")
+	UPROPERTY(BlueprintReadOnly, Category = "PriamryAttribute")
 	FGameplayAttributeData Strength;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, Strength)
 
-	UPROPERTY(BlueprintReadOnly, Category = "Attribute")
+	UPROPERTY(BlueprintReadOnly, Category = "PriamryAttribute")
 	FGameplayAttributeData Intelligence;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, Intelligence)
 
-	UPROPERTY(BlueprintReadOnly, Category = "Attribute")
+	UPROPERTY(BlueprintReadOnly, Category = "PriamryAttribute")
 	FGameplayAttributeData Luck;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, Luck)
 
-	UPROPERTY(BlueprintReadOnly, Category = "Attribute")
+	UPROPERTY(BlueprintReadOnly, Category = "PriamryAttribute")
 	FGameplayAttributeData DefensePower;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, DefensePower)
+
+	UPROPERTY(BlueprintReadOnly, Category = "PriamryAttribute")
+	FGameplayAttributeData Vigor;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, Vigor)
 	//~End Primary Attribute
+
+	//~Begin Secondary Attribute
+	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
+	FGameplayAttributeData Armor;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, Armor)
+	
+	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
+	FGameplayAttributeData ArmorPenetration;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, ArmorPenetration)
+
+	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
+	FGameplayAttributeData CriticalHitChance;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, CriticalHitChance)
+
+	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
+	FGameplayAttributeData CriticalHitDamage;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, CriticalHitDamage)
+
+	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
+	FGameplayAttributeData CriticalHitResistance;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, CriticalHitResistance)
+
+	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
+	FGameplayAttributeData HealthRegeneration;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, HealthRegeneration)
+	
+	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
+	FGameplayAttributeData MaxHealth;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, MaxHealth)
+
+	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
+	FGameplayAttributeData ManaRegeneration;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, ManaRegeneration)
+	
+	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
+	FGameplayAttributeData MaxMana;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, MaxMana)
+	//~End Secondary Attribute
 
 protected:
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
