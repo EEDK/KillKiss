@@ -75,10 +75,10 @@ Plugins/**/Intermediate/*
 DerivedDataCache/*
 
 # Contents
-ThirdPerson/**
+Content/ThirdPerson/**
 Content/Characters/**
 Content/ParagonGideon/**
 Content/MegaMagicVFXBundle/**
 Content/Assets/**
-StarterContent/**
+Content/StarterContent/**
 Content/Fab/**

@@ -38,10 +38,16 @@
 
 ## 앞으로의 계획
 
-- [계획 1: 캐릭터 Attribute 설정]
-- [계획 2: 전투 시스템 UI 구축]
+- [계획 1: 캐릭터 Attribute 설정] o
+- [계획 2: 전투 시스템 UI 구축] 진행중
 - [계획 3: 적 AI 구축]
 
 ## Docs
 
 [Docs링크](https://killkissdocs-4ba02b.gitlab.io/killkiss.html)
+
+## 오늘 할일
+
+- PickUp Asset 정리 (HP 포션, MP 포션)
+- Secondary Attribute 생성
+- Enemy Asset 탐색
