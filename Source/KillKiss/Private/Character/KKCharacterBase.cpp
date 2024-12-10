@@ -3,6 +3,9 @@
 
 #include "Character/KKCharacterBase.h"
 
+#include "AbilitySystemComponent.h"
+#include "GameplayEffect.h"
+
 AKKCharacterBase::AKKCharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
@@ -16,6 +19,25 @@ void AKKCharacterBase::BeginPlay()
 
 void AKKCharacterBase::InitAbilityActorInfo()
 {
+}
+
+void AKKCharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const
+{
+	UAbilitySystemComponent* TargetASC = GetAbilitySystemComponent();
+	check(TargetASC);
+	check(GameplayEffectClass);
+
+	const FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
+	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(
+		GameplayEffectClass, 1.f, EffectContextHandle);
+	TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+}
+
+void AKKCharacterBase::InitializeDefaultAttributes() const
+{
+	ApplyEffectToSelf(DefaultPrimaryAttributes, 1.f);
+	ApplyEffectToSelf(DefaultSecondaryAttributes, 1.f);
+	ApplyEffectToSelf(DefaultVitalAttributes, 1.f);
 }
 
 UAbilitySystemComponent* AKKCharacterBase::GetAbilitySystemComponent() const

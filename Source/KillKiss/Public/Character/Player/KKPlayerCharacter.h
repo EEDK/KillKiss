@@ -48,5 +48,5 @@ private:
 #pragma endregion
 
 	virtual void InitAbilityActorInfo() override;
-	void InitPrimaryAttributes() const;
+	
 };
