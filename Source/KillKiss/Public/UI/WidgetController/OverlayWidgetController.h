@@ -6,7 +6,7 @@
 #include "KKWidgetController.h"
 #include "OverlayWidgetController.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChanged, float, NewValue /*Attribute*/);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChanged, const float&, NewValue /*Attribute*/);
 
 /**
  * 
