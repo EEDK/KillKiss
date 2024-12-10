@@ -21,7 +21,7 @@ void AKKCharacterBase::InitAbilityActorInfo()
 {
 }
 
-void AKKCharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const
+void AKKCharacterBase::ApplyEffectToSelf(const TSubclassOf<UGameplayEffect>& GameplayEffectClass, float Level) const
 {
 	UAbilitySystemComponent* TargetASC = GetAbilitySystemComponent();
 	check(TargetASC);

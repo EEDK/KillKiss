@@ -45,9 +45,3 @@
 ## Docs
 
 [Docs링크](https://killkissdocs-4ba02b.gitlab.io/killkiss.html)
-
-## 오늘 할일
-
-- PickUp Asset 정리 (HP 포션, MP 포션)
-- Secondary Attribute 생성
-- Enemy Asset 탐색

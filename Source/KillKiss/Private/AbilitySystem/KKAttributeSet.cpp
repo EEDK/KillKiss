@@ -10,10 +10,7 @@
 UKKAttributeSet::UKKAttributeSet()
 {
 	InitCurrentHealth(50.f);
-	InitMaxHealth(100.f);
-
 	InitCurrentMana(25.f);
-	InitMaxMana(50.f);
 }
 
 void UKKAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
