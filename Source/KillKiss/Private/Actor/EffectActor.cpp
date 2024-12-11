@@ -29,6 +29,11 @@ void AEffectActor::OnOverlap(AActor* TargetActor)
 	{
 		ApplyEffectToTarget(TargetActor, DurationGameplayEffect);
 	}
+
+	if (InfiniteEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
+	{
+		ApplyEffectToTarget(TargetActor, InfiniteGameplayEffect);
+	}
 }
 
 void AEffectActor::OnEndOverlap(AActor* TargetActor)
@@ -41,6 +46,24 @@ void AEffectActor::OnEndOverlap(AActor* TargetActor)
 	if (DurationEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
 	{
 		ApplyEffectToTarget(TargetActor, DurationGameplayEffect);
+	}
+
+	if (InfiniteEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap)
+	{
+		ApplyEffectToTarget(TargetActor, InfiniteGameplayEffect);
+	}
+
+	if (InfiniteEffectRemovalPolicy == EEffectRemovalPolicy::RemoveOnEndOverlap)
+	{
+		for (const TTuple<FActiveGameplayEffectHandle, UAbilitySystemComponent*>& ActiveEffectHandle :
+		     ActiveEffectHandles)
+		{
+			UAbilitySystemComponent* TargetASC = ActiveEffectHandle.Value;
+			const FActiveGameplayEffectHandle TargetEffectHandle = ActiveEffectHandle.Key;
+			TargetASC->RemoveActiveGameplayEffect(TargetEffectHandle, 1);
+		}
+
+		ActiveEffectHandles.Empty();
 	}
 }
 
@@ -58,10 +81,16 @@ void AEffectActor::ApplyEffectToTarget(AActor* TargetActor, const TSubclassOf<UG
 	EffectContextHandle.AddSourceObject(this);
 	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(
 		GameplayEffectClass, ActorLevel, EffectContextHandle);
-	TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+	const FActiveGameplayEffectHandle EffectHandle =
+		TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
 
 	if (bDestroy)
 	{
 		Destroy();
+	}
+
+	if (InfiniteEffectRemovalPolicy == EEffectRemovalPolicy::RemoveOnEndOverlap)
+	{
+		ActiveEffectHandles.Add(EffectHandle, TargetASC);
 	}
 }
