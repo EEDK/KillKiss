@@ -39,7 +39,7 @@ float UMMC_MaxHealth::CalculateBaseMagnitude_Implementation(const FGameplayEffec
 
 	ICombatInterface* CombatInterface = Cast<ICombatInterface>(Spec.GetContext().GetSourceObject());
 
-	int32 Level = CombatInterface->GetPlayerLevel();
+	const int32 Level = CombatInterface->GetPlayerLevel();
 
 	return Vigor * 10 + Strength * 2 + Level * 10;
 }
