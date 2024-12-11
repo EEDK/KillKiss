@@ -27,6 +27,9 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Abilities")
 	TObjectPtr<UAttributeSet> AttributeSet;
 
+private:
+	int32 PlayerLevel = 1.f;
+
 public:
 	// ~Begin IAbilitySystemInterface Interface.
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
@@ -36,4 +39,6 @@ public:
 	{
 		return AttributeSet;
 	}
+
+	FORCEINLINE int32 GetPlayerLevel() const { return PlayerLevel; }
 };

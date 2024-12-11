@@ -23,6 +23,10 @@ class KILLKISS_API AKKPlayerCharacter : public AKKCharacterBase
 public:
 	AKKPlayerCharacter();
 
+	// Begin CombatInterface;
+	virtual int32 GetPlayerLevel() override;
+	//~Begin CombatInterface;
+
 protected:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual void BeginPlay() override;
@@ -48,5 +52,4 @@ private:
 #pragma endregion
 
 	virtual void InitAbilityActorInfo() override;
-	
 };

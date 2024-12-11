@@ -27,9 +27,12 @@ void AKKCharacterBase::ApplyEffectToSelf(const TSubclassOf<UGameplayEffect>& Gam
 	check(TargetASC);
 	check(GameplayEffectClass);
 
-	const FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
+	FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
+	EffectContextHandle.AddSourceObject(this);
+
 	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(
 		GameplayEffectClass, 1.f, EffectContextHandle);
+
 	TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
 }
 

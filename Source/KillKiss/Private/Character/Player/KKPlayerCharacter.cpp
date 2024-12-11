@@ -42,6 +42,14 @@ AKKPlayerCharacter::AKKPlayerCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 }
 
+int32 AKKPlayerCharacter::GetPlayerLevel()
+{
+	const AKKPlayerState* KKPlayerState = Cast<AKKPlayerState>(GetPlayerState());
+	check(KKPlayerState);
+
+	return KKPlayerState->GetPlayerLevel();
+}
+
 void AKKPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT("입력 설정 데이터 에셋이 누락되었습니다."));
