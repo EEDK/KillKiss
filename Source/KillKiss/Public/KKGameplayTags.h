@@ -6,14 +6,17 @@
 
 namespace KKGameplayTags
 {
-	//Begin InputTag;
+	//InputTag;
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Move)
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Look)
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Jump)
-	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_OpenAttribute)
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_OpenAttributeMenu)
 
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Toggleable)
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_MustBeHeld)
-	//~Begin InputTag;
-	
+	//~InputTag;
+
+	//Player Tags
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_OpenAttributeMenu);
+	//~Player Tags
 }
