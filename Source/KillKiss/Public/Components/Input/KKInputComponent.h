@@ -40,7 +40,8 @@ inline void UKKInputComponent::BindNativeInputAction(const UDataAsset_InputConfi
 
 template <class UserObject, typename CallbackFunc>
 void UKKInputComponent::BindAbilityInputAction(const UDataAsset_InputConfig* InInputConfig, UserObject* ContextObject,
-                                               CallbackFunc InputPressedFunc, CallbackFunc InputReleasedFunc)
+                                               CallbackFunc
+                                               InputPressedFunc, CallbackFunc InputReleasedFunc)
 {
 	checkf(InInputConfig, TEXT("Input config data asset is null,can not proceed with binding"));
 

@@ -73,6 +73,10 @@ void AKKPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	                                        ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
 	KKInputComponent->BindNativeInputAction(InputConfigDataAsset, KKGameplayTags::InputTag_Jump,
 	                                        ETriggerEvent::Triggered, this, &ThisClass::Input_Jump);
+
+	KKInputComponent->BindAbilityInputAction(InputConfigDataAsset, this,
+	                                         &ThisClass::Input_AbilityInputPressed,
+	                                         &ThisClass::Input_AbilityInputReleased);
 }
 
 void AKKPlayerCharacter::BeginPlay()
