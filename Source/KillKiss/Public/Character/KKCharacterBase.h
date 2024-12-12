@@ -8,6 +8,7 @@
 #include "Interface/CombatInterface.h"
 #include "KKCharacterBase.generated.h"
 
+class UDataAsset_StartupDataBase;
 class UGameplayEffect;
 class UAttributeSet;
 
@@ -28,6 +29,7 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Abilities")
 	TObjectPtr<UAttributeSet> AttributeSet;
 
+	// Set Attributes Data
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
 	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes;
 
@@ -36,6 +38,11 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
 	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="CharacterData")
+	TSoftObjectPtr<UDataAsset_StartupDataBase> CharacterStartUpData;
+	//~Set Attributes Data
+
 
 	virtual void InitAbilityActorInfo();
 

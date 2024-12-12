@@ -43,7 +43,7 @@ void UKKInputComponent::BindAbilityInputAction(const UDataAsset_InputConfig* InI
                                                CallbackFunc
                                                InputPressedFunc, CallbackFunc InputReleasedFunc)
 {
-	checkf(InInputConfig, TEXT("Input config data asset is null,can not proceed with binding"));
+	checkf(InInputConfig, TEXT("Input config data asset is null, can not proceed with binding"));
 
 	for (const FKKInputActionConfig& AbilityInputActionConfig : InInputConfig->AbilityInputActions)
 	{
