@@ -53,7 +53,7 @@ int32 AKKPlayerCharacter::GetPlayerLevel()
 void AKKPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT("입력 설정 데이터 에셋이 누락되었습니다."));
-	ULocalPlayer* LocalPlayer = GetController<AKKPlayerController>()->GetLocalPlayer();
+	const ULocalPlayer* LocalPlayer = GetController<AKKPlayerController>()->GetLocalPlayer();
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem =
 		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LocalPlayer);
@@ -139,4 +139,16 @@ void AKKPlayerCharacter::InitAbilityActorInfo()
 			KKHUD->InitOverlay(PlayerController, KKPlayerState, GetAbilitySystemComponent(), GetAttributeSet());
 		}
 	}
+}
+
+void AKKPlayerCharacter::Input_AbilityInputPressed(FGameplayTag InInputTag)
+{
+	UKKAbilitySystemComponent* KKASC = CastChecked<UKKAbilitySystemComponent>(AbilitySystemComponent);
+	KKASC->OnAbilityInputPressed(InInputTag);
+}
+
+void AKKPlayerCharacter::Input_AbilityInputReleased(FGameplayTag InInputTag)
+{
+	UKKAbilitySystemComponent* KKASC = CastChecked<UKKAbilitySystemComponent>(AbilitySystemComponent);
+	KKASC->OnAbilityInputReleased(InInputTag);
 }

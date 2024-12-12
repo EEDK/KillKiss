@@ -14,17 +14,20 @@ USTRUCT(BlueprintType)
 struct FKKInputActionConfig
 {
 	GENERATED_BODY()
-
-public:
+	
+	FKKInputActionConfig() : InputAction(nullptr)
+	{
+	};
+	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta=(Categories = "InputTag"))
 	FGameplayTag InputTag;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	UInputAction* InputAction;
-
-	FKKInputActionConfig()
+	
+	bool IsValid() const
 	{
-		InputAction = nullptr;
+		return InputTag.IsValid() && InputAction;
 	}
 };
 
@@ -44,4 +47,7 @@ public:
 	TArray<FKKInputActionConfig> NativeInputActions;
 
 	UInputAction* FindNativeInputActionByTag(const FGameplayTag& InInputTag) const;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta=(TitleProperty = "InputTag"))
+	TArray<FKKInputActionConfig> AbilityInputActions;
 };
