@@ -15,6 +15,7 @@
 #include "KKGameplayTags.h"
 #include "AbilitySystem/KKAbilitySystemComponent.h"
 #include "Character/Player/KKPlayerState.h"
+#include "DataAssets/StartupData/DataAsset_StartupDataBase.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "UI/KKHUD.h"
 
@@ -134,7 +135,16 @@ void AKKPlayerCharacter::InitAbilityActorInfo()
 	AbilitySystemComponent = KKPlayerState->GetAbilitySystemComponent();
 	AttributeSet = KKPlayerState->GetAttributeSet();
 
-	InitializeDefaultAttributes();
+	ensureMsgf(!CharacterStartUpData.IsNull(), TEXT("Forgot to assign start up data to %s"), *GetName());
+
+	if (UDataAsset_StartupDataBase* LoadedData = CharacterStartUpData.LoadSynchronous())
+	{
+		if (UKKAbilitySystemComponent* KKAbilitySystemComponent =
+			Cast<UKKAbilitySystemComponent>(AbilitySystemComponent))
+		{
+			LoadedData->GiveToAbilitySystemComponent(KKAbilitySystemComponent, 1.f);
+		}
+	}
 
 	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
 	{

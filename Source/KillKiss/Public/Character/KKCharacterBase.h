@@ -30,26 +30,11 @@ protected:
 	TObjectPtr<UAttributeSet> AttributeSet;
 
 	// Set Attributes Data
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
-	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes;
-
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
-	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
-
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
-	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="CharacterData")
 	TSoftObjectPtr<UDataAsset_StartupDataBase> CharacterStartUpData;
 	//~Set Attributes Data
-
-
+	
 	virtual void InitAbilityActorInfo();
-
-	void ApplyEffectToSelf(const TSubclassOf<UGameplayEffect>& GameplayEffectClass, float Level) const;
-
-	// ApplyEffectToSelf 함수를 통해 Attribute 값을 초기화 하는 함수
-	void InitializeDefaultAttributes() const;
 
 public:
 	// ~Begin IAbilitySystemInterface Interface.

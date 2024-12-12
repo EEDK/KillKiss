@@ -5,6 +5,7 @@
 
 #include "AbilitySystem/KKAbilitySystemComponent.h"
 #include "AbilitySystem/GameplayAbility/KKGameplayAbility.h"
+#include "Character/KKCharacterBase.h"
 
 void UDataAsset_StartupDataBase::GiveToAbilitySystemComponent(UKKAbilitySystemComponent* InASCToGive, int32 ApplyLevel)
 {
@@ -21,9 +22,13 @@ void UDataAsset_StartupDataBase::GiveToAbilitySystemComponent(UKKAbilitySystemCo
 			{
 				continue;
 			}
+			FGameplayEffectContextHandle EffectContextHandle = InASCToGive->MakeEffectContext();
+
+			const AKKCharacterBase* Character = Cast<AKKCharacterBase>(InASCToGive->GetAvatarActor());
+			EffectContextHandle.AddSourceObject(Character);
 
 			const UGameplayEffect* EffectCDO = EffectClass->GetDefaultObject<UGameplayEffect>();
-			InASCToGive->ApplyGameplayEffectToSelf(EffectCDO, ApplyLevel, InASCToGive->MakeEffectContext());
+			InASCToGive->ApplyGameplayEffectToSelf(EffectCDO, ApplyLevel, EffectContextHandle);
 		}
 	}
 }
