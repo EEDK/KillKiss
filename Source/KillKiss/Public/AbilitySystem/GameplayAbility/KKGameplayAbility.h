@@ -35,4 +35,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Ability")
 	EKKAbilityActivationPolicy AbilityActivationPolicy = EKKAbilityActivationPolicy::OnTriggered;
+
+
+private:
+	
 };
