@@ -11,11 +11,17 @@ void UKKAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag& InInpu
 	{
 		return;
 	}
+
+
 	for (const FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
 	{
 		if (!AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InInputTag))
 		{
 			continue;
+		}
+		if (InInputTag.MatchesTag(KKGameplayTags::InputTag_Toggleable) && AbilitySpec.IsActive())
+		{
+			CancelAbilityHandle(AbilitySpec.Handle);
 		}
 		else
 		{

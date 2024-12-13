@@ -9,7 +9,7 @@ namespace KKGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Move, "InputTag.Move")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Look, "InputTag.Look")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Jump, "InputTag.Jump")
-	UE_DEFINE_GAMEPLAY_TAG(InputTag_OpenAttributeMenu, "InputTag.OpenAttributeMenu")
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Toggleable_OpenAttributeMenu, "InputTag.Toggleable.OpenAttributeMenu")
 
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Toggleable, "InputTag.Toggleable")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_MustBeHeld, "InputTag.MustBeHeld")
