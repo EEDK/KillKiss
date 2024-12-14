@@ -15,7 +15,11 @@ namespace KKGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_MustBeHeld, "InputTag.MustBeHeld")
 	//~InputTag;
 
-	//Player Tags
+	//Ability Tags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_OpenAttributeMenu, "Player.Ability.OpenAttributeMenu")
-	//~Player Tags
+	//~Ability Tags
+
+	//Status Tags
+	UE_DEFINE_GAMEPLAY_TAG(Player_State_AttributeMenuOpen, "Player.State.AttributeMenuOpen")
+	//~Status Tags
 }

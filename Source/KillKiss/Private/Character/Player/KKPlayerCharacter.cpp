@@ -93,6 +93,11 @@ void AKKPlayerCharacter::PossessedBy(AController* NewController)
 
 void AKKPlayerCharacter::Input_Move(const FInputActionValue& InputActionValue)
 {
+	if (AbilitySystemComponent->HasMatchingGameplayTag(KKGameplayTags::Player_State_AttributeMenuOpen))
+	{
+		return;
+	}
+
 	const FVector2D MovementVector = InputActionValue.Get<FVector2D>();
 	const FRotator MovementRotation(0.f, Controller->GetControlRotation().Yaw, 0.f);
 	if (MovementVector.Y != 0.f)
@@ -109,6 +114,11 @@ void AKKPlayerCharacter::Input_Move(const FInputActionValue& InputActionValue)
 
 void AKKPlayerCharacter::Input_Look(const FInputActionValue& InputActionValue)
 {
+	if (AbilitySystemComponent->HasMatchingGameplayTag(KKGameplayTags::Player_State_AttributeMenuOpen))
+	{
+		return;
+	}
+
 	const FVector2D LookAxisVector = InputActionValue.Get<FVector2D>();
 
 	if (LookAxisVector.X != 0.f)
@@ -123,6 +133,11 @@ void AKKPlayerCharacter::Input_Look(const FInputActionValue& InputActionValue)
 
 void AKKPlayerCharacter::Input_Jump(const FInputActionValue& InputActionValue)
 {
+	if (AbilitySystemComponent->HasMatchingGameplayTag(KKGameplayTags::Player_State_AttributeMenuOpen))
+	{
+		return;
+	}
+
 	Jump();
 }
 
