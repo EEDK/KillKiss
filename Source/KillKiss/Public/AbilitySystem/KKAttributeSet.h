@@ -39,6 +39,10 @@ struct FEffectProperties
 	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
+
+template <class T>
+using TStaticFuncPtr = typename TBaseStaticDelegateInstance<T, FDefaultDelegateUserPolicy>::FFuncPtr;
+
 /**
  * 
  */
@@ -50,16 +54,17 @@ class KILLKISS_API UKKAttributeSet : public UAttributeSet
 public:
 	UKKAttributeSet();
 
+	TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttributes;
+
 	//~Begin Vital Attribute
 	UPROPERTY(BlueprintReadOnly, Category = "Vital")
 	FGameplayAttributeData CurrentHealth;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, CurrentHealth)
-	
+
 	UPROPERTY(BlueprintReadOnly, Category = "Vital")
 	FGameplayAttributeData CurrentMana;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, CurrentMana)
 	//~End Vital Attribute
-
 
 	//~Begin Primary Attribute
 	UPROPERTY(BlueprintReadOnly, Category = "PriamryAttribute")
@@ -87,7 +92,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
 	FGameplayAttributeData Armor;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, Armor)
-	
+
 	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
 	FGameplayAttributeData ArmorPenetration;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, ArmorPenetration)
@@ -107,7 +112,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
 	FGameplayAttributeData HealthRegeneration;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, HealthRegeneration)
-	
+
 	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, MaxHealth)
@@ -115,7 +120,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
 	FGameplayAttributeData ManaRegeneration;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, ManaRegeneration)
-	
+
 	UPROPERTY(BlueprintReadOnly, Category = "SecondaryAttribute")
 	FGameplayAttributeData MaxMana;
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, MaxMana)

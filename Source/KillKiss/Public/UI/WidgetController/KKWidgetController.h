@@ -46,10 +46,12 @@ UCLASS()
 class KILLKISS_API UKKWidgetController : public UObject
 {
 	GENERATED_BODY()
+
 public:
 	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParms);
 
+	UFUNCTION(BlueprintCallable)
 	virtual void BroadcastInitialValues();
 	virtual void BindCallbacksToDependencies();
 
