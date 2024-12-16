@@ -4,6 +4,7 @@
 #include "UI/KKHUD.h"
 
 #include "UI/KKUserWidget.h"
+#include "UI/WidgetController/AttributeMenuWidgetController.h"
 #include "UI/WidgetController/OverlayWidgetController.h"
 
 UOverlayWidgetController* AKKHUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
@@ -18,6 +19,21 @@ UOverlayWidgetController* AKKHUD::GetOverlayWidgetController(const FWidgetContro
 	}
 
 	return OverlayWidgetController;
+}
+
+UAttributeMenuWidgetController* AKKHUD::GetAttributeMenuWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if (!AttributeMenuWidgetController)
+	{
+		AttributeMenuWidgetController = NewObject<UAttributeMenuWidgetController>(
+			this, AttributeMenuWidgetControllerClass);
+		AttributeMenuWidgetController->SetWidgetControllerParams(WCParams);
+		AttributeMenuWidgetController->BindCallbacksToDependencies();
+
+		return AttributeMenuWidgetController;
+	}
+
+	return AttributeMenuWidgetController;
 }
 
 void AKKHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)

@@ -11,6 +11,8 @@ class UAttributeSet;
 class UAbilitySystemComponent;
 class UOverlayWidgetController;
 class UKKUserWidget;
+class UAttributeMenuWidgetController;
+
 /**
  * 
  */
@@ -25,6 +27,9 @@ public:
 
 	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams);
 
+	UAttributeMenuWidgetController* GetAttributeMenuWidgetController(const FWidgetControllerParams& WCParams);
+
+
 	void InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS);
 
 private:
@@ -36,4 +41,10 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UOverlayWidgetController> OverlayWidgetControllerClass;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeMenuWidgetController> AttributeMenuWidgetController;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UAttributeMenuWidgetController> AttributeMenuWidgetControllerClass;
 };

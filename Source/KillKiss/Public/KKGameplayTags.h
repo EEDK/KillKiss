@@ -23,4 +23,23 @@ namespace KKGameplayTags
 	//Status Tags
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_State_AttributeMenuOpen);
 	//~Status Tags
+
+	//Attribute Tags
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Primary_Strength);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Primary_Intelligence);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Primary_Luck);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Primary_DefensePower);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Primary_Vigor);
+
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Secondary_Armor);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Secondary_ArmorPenetration);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Secondary_CriticalHitChance);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Secondary_CriticalHitDamage);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Secondary_CriticalHitResistance);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Secondary_HealthRegeneration);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Secondary_MaxHealth);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Secondary_ManaRegeneration);
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Secondary_MaxMana);
+	//~Attribute Tags
+
 }
