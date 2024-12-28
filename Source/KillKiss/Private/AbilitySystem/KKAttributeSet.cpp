@@ -5,6 +5,7 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "GameplayEffectExtension.h"
+#include "KKDebugHelper.h"
 #include "KKGameplayTags.h"
 #include "GameFramework/Character.h"
 
@@ -55,6 +56,7 @@ void UKKAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallback
 	if (Data.EvaluatedData.Attribute == GetCurrentHealthAttribute())
 	{
 		SetCurrentHealth(FMath::Clamp(GetCurrentHealth(), 0.f, GetMaxHealth()));
+		Debug::Print("New Health : " + FString::SanitizeFloat(GetCurrentHealth()));
 	}
 
 	if (Data.EvaluatedData.Attribute == GetCurrentManaAttribute())

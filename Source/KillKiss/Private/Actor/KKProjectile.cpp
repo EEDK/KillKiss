@@ -3,6 +3,8 @@
 
 #include "Actor/KKProjectile.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
@@ -21,12 +23,13 @@ AKKProjectile::AKKProjectile()
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Component"));
 	ProjectileMovementComponent->InitialSpeed = 550.f;
 	ProjectileMovementComponent->MaxSpeed = 550.f;
-	ProjectileMovementComponent->ProjectileGravityScale = 0.2f;
+	ProjectileMovementComponent->ProjectileGravityScale = 0.03f;
 }
 
 void AKKProjectile::BeginPlay()
 {
 	Super::BeginPlay();
+	SetLifeSpan(LifeSpan);
 
 	SphereComponent->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnSphereOverlap);
 }
@@ -35,4 +38,10 @@ void AKKProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AA
                                     UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,
                                     const FHitResult& SweepResult)
 {
+	if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor))
+	{
+		TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpecHandle.Data.Get());
+	}
+
+	Destroy();
 }

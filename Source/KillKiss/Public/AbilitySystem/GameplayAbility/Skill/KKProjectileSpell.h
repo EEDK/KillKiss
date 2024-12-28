@@ -23,12 +23,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<AKKProjectile> ProjectileClass;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UGameplayEffect> DamageEffectClass;
+
 	UFUNCTION(BlueprintCallable, Category = "Projectile")
 	void SpawnFireBall();
-
 
 private:
 	UPROPERTY(BlueprintReadWrite, Category = "Projectile", meta = (AllowPrivateAccess = "true"))
 	int32 ComboCount = 1;
-
 };

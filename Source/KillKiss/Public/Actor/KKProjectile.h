@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayEffectTypes.h"
 #include "GameFramework/Actor.h"
 #include "KKProjectile.generated.h"
 
@@ -17,8 +18,14 @@ class KILLKISS_API AKKProjectile : public AActor
 public:
 	AKKProjectile();
 
+	UPROPERTY(BlueprintReadWrite, meta=(ExposeOnSpawn = true))
+	FGameplayEffectSpecHandle DamageEffectSpecHandle;
+
 protected:
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile")
+	float LifeSpan = 5.f;
 
 private:
 	UPROPERTY(VisibleAnywhere)
