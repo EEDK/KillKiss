@@ -7,7 +7,7 @@
 #include "CombatInterface.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE(MinimalAPI)
+UINTERFACE(MinimalAPI, BlueprintType)
 class UCombatInterface : public UInterface
 {
 	GENERATED_BODY()
@@ -22,4 +22,9 @@ class KILLKISS_API ICombatInterface
 
 public:
 	virtual int32 GetPlayerLevel();
+
+	virtual FVector GetPlayerWeaponSocket();
+	virtual FVector GetLeftHandSocket();
+	virtual FVector GetRightHandSocket();
+
 };

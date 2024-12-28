@@ -26,6 +26,10 @@ namespace KKGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_OpenAttributeMenu, "Player.Ability.OpenAttributeMenu")
 	//~Ability Tags
 
+	//Event Tags
+	UE_DEFINE_GAMEPLAY_TAG(Player_Event_OnAttack, "Player.Event.OnAttack")
+	//~Event Tags
+
 	//Status Tags
 	UE_DEFINE_GAMEPLAY_TAG(Player_State_AttributeMenuOpen, "Player.State.AttributeMenuOpen")
 	//~Status Tags

@@ -51,6 +51,16 @@ int32 AKKPlayerCharacter::GetPlayerLevel()
 	return KKPlayerState->GetPlayerLevel();
 }
 
+FVector AKKPlayerCharacter::GetLeftHandSocket()
+{
+	return GetMesh()->GetSocketLocation(LeftHandSocketName);
+}
+
+FVector AKKPlayerCharacter::GetRightHandSocket()
+{
+	return GetMesh()->GetSocketLocation(RightHandSocketName);
+}
+
 void AKKPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT("입력 설정 데이터 에셋이 누락되었습니다."));

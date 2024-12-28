@@ -12,7 +12,7 @@ class UDataAsset_StartupDataBase;
 class UGameplayEffect;
 class UAttributeSet;
 
-UCLASS()
+UCLASS(Abstract)
 class KILLKISS_API AKKCharacterBase : public ACharacter, public IAbilitySystemInterface, public ICombatInterface
 {
 	GENERATED_BODY()
@@ -33,11 +33,13 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="CharacterData")
 	TSoftObjectPtr<UDataAsset_StartupDataBase> CharacterStartUpData;
 	//~Set Attributes Data
-	
+
 	virtual void InitAbilityActorInfo();
+
 
 public:
 	// ~Begin IAbilitySystemInterface Interface.
+	UFUNCTION()
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	// ~End IAbilitySystemInterface Interface
 

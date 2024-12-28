@@ -26,6 +26,8 @@ public:
 
 	// Begin CombatInterface;
 	virtual int32 GetPlayerLevel() override;
+	virtual FVector GetLeftHandSocket() override;
+	virtual FVector GetRightHandSocket() override;
 	//~Begin CombatInterface;
 
 protected:
@@ -53,6 +55,15 @@ private:
 
 	void Input_AbilityInputPressed(FGameplayTag InInputTag);
 	void Input_AbilityInputReleased(FGameplayTag InInputTag);
+#pragma endregion
+
+
+#pragma region Variables
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess = "true"))
+	FName LeftHandSocketName = "LeftHandSocket";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess = "true"))
+	FName RightHandSocketName = "RightHandSocket";
 #pragma endregion
 
 	virtual void InitAbilityActorInfo() override;
