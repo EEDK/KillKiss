@@ -5,11 +5,14 @@
 
 #include "AbilitySystem/KKAbilitySystemComponent.h"
 #include "AbilitySystem/KKAttributeSet.h"
+#include "Components/CapsuleComponent.h"
 #include "DataAssets/StartupData/DataAsset_StartupDataBase.h"
 #include "Engine/AssetManager.h"
 
 AKKEnemyCharacter::AKKEnemyCharacter()
 {
+
+	
 	AbilitySystemComponent = CreateDefaultSubobject<UKKAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AttributeSet = CreateDefaultSubobject<UKKAttributeSet>(TEXT("AttributeSet"));
 }
