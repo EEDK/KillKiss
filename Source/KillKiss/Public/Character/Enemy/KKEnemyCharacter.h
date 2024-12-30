@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Character/KKCharacterBase.h"
+#include "UI/WidgetController/OverlayWidgetController.h"
 #include "KKEnemyCharacter.generated.h"
+
+class UWidgetComponent;
 
 /**
  * 
@@ -27,10 +30,20 @@ protected:
 	virtual void PossessedBy(AController* NewController) override;
 	// ~End APawn Interface
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UWidgetComponent> HealthBar;
+
+	//~ Begin WidgetController Delegates
+	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
+	FOnAttributeChanged OnHealthChanged;
+
+	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
+	FOnAttributeChanged OnMaxHealthChanged;
+	//~ End WidgetController Delegates
 
 private:
 	void InitEnemyStartUpData() const;
-	
+
 	UPROPERTY(EditAnywhere)
 	int32 Level = 1;
 };
