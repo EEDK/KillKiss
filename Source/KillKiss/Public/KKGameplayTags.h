@@ -24,13 +24,11 @@ namespace KKGameplayTags
 
 	//Ability Tags
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Attack);
-
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_OpenAttributeMenu);
 	//~Ability Tags
 
 	//Event Tags
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_OnAttack);
-
 	//~Event Tags
 
 	//Status Tags
