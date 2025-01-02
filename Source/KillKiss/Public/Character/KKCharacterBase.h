@@ -36,12 +36,19 @@ protected:
 
 	virtual void InitAbilityActorInfo();
 
+private:
+	UPROPERTY(EditDefaultsOnly)
+	UAnimMontage* HitReactMontage;
 
 public:
 	// ~Begin IAbilitySystemInterface Interface.
 	UFUNCTION()
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	// ~End IAbilitySystemInterface Interface
+
+	// ~Begin ICombatInterface Interface.
+	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+	// ~End ICombatInterface Interface
 
 	FORCEINLINE UAttributeSet* GetAttributeSet() const
 	{

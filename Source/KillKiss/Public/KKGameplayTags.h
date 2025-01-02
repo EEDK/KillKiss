@@ -27,6 +27,10 @@ namespace KKGameplayTags
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_OpenAttributeMenu);
 	//~Ability Tags
 
+	// Shared Tags
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_HitPause);
+	// ~Shared Tag
+
 	//Event Tags
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_OnAttack);
 	//~Event Tags

@@ -27,4 +27,6 @@ public:
 	virtual FVector GetLeftHandSocket();
 	virtual FVector GetRightHandSocket();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	UAnimMontage* GetHitReactMontage();
 };

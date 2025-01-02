@@ -26,6 +26,10 @@ namespace KKGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_OpenAttributeMenu, "Player.Ability.OpenAttributeMenu")
 	//~Ability Tags
 
+	// Shared Tags
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_HitPause, "Shared.Ability.HitPause")
+	// ~Shared Tag
+
 	//Event Tags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_OnAttack, "Player.Event.OnAttack")
 	//~Event Tags

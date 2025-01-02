@@ -29,3 +29,8 @@ UAbilitySystemComponent* AKKCharacterBase::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
 }
+
+UAnimMontage* AKKCharacterBase::GetHitReactMontage_Implementation()
+{
+	return HitReactMontage;
+}

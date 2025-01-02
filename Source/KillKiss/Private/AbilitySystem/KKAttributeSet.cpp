@@ -62,6 +62,28 @@ void UKKAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallback
 	{
 		SetCurrentMana(FMath::Clamp(GetCurrentMana(), 0.f, GetMaxMana()));
 	}
+	if (Data.EvaluatedData.Attribute == GetIncomingDamageAttribute())
+	{
+		const float LocalIncomingDamage = GetIncomingDamage();
+		SetIncomingDamage(0.f);
+
+		if (LocalIncomingDamage > 0.f)
+		{
+			const float NewHealth = GetCurrentHealth() - LocalIncomingDamage;
+			SetCurrentHealth(FMath::Clamp(NewHealth, 0.f, GetMaxHealth()));
+
+			const bool bFatal = NewHealth <= 0.f;
+			if (bFatal)
+			{
+			}
+			else
+			{
+				FGameplayTagContainer TagContainer;
+				TagContainer.AddTag(KKGameplayTags::Shared_Ability_HitPause);
+				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
+			}
+		}
+	}
 }
 
 void UKKAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const

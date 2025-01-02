@@ -126,6 +126,13 @@ public:
 	ATTRIBUTE_ACCESSORS(UKKAttributeSet, MaxMana)
 	//~End Secondary Attribute
 
+	//~Begin Meta Attribute
+	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UKKAttributeSet, IncomingDamage);
+	//~End	Meta Attribute
+
+
 protected:
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
