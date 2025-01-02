@@ -3,6 +3,7 @@
 
 #include "Character/Enemy/KKEnemyCharacter.h"
 
+#include "KKDebugHelper.h"
 #include "AbilitySystem/KKAbilitySystemComponent.h"
 #include "AbilitySystem/KKAttributeSet.h"
 #include "Components/CapsuleComponent.h"
@@ -29,6 +30,35 @@ void AKKEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	InitAbilityActorInfo();
+}
+
+void AKKEnemyCharacter::InitAbilityActorInfo()
+{
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	ensureMsgf(!CharacterStartUpData.IsNull(), TEXT("Forgot to assign start up data to %s"), *GetName());
+
+	UAssetManager::GetStreamableManager().RequestAsyncLoad(
+		CharacterStartUpData.ToSoftObjectPath(),
+		FStreamableDelegate::CreateLambda([this]()
+		{
+			if (UDataAsset_StartupDataBase* LoadedData = CharacterStartUpData.LoadSynchronous())
+			{
+				if (UKKAbilitySystemComponent* KKAbilitySystemComponent =
+					Cast<UKKAbilitySystemComponent>(AbilitySystemComponent))
+				{
+					LoadedData->GiveToAbilitySystemComponent(KKAbilitySystemComponent, Level);
+				}
+
+				BindHealthChangeCallbacks();
+			}
+		})
+	);
+}
+
+
+void AKKEnemyCharacter::BindHealthChangeCallbacks()
+{
 	if (UKKUserWidget* KKUserWidget = Cast<UKKUserWidget>(HealthBar->GetUserWidgetObject()))
 	{
 		KKUserWidget->SetWidgetController(this);
@@ -51,36 +81,7 @@ void AKKEnemyCharacter::BeginPlay()
 				OnMaxHealthChanged.Broadcast(Data.NewValue);
 			}
 		);
-
 		OnHealthChanged.Broadcast(KKAttributeSet->GetCurrentHealth());
 		OnMaxHealthChanged.Broadcast(KKAttributeSet->GetMaxHealth());
 	}
-}
-
-void AKKEnemyCharacter::PossessedBy(AController* NewController)
-{
-	Super::PossessedBy(NewController);
-
-	AbilitySystemComponent->InitAbilityActorInfo(this, this);
-	ensureMsgf(!CharacterStartUpData.IsNull(), TEXT("Forgot to assign start up data to %s"), *GetName());
-
-	InitEnemyStartUpData();
-}
-
-void AKKEnemyCharacter::InitEnemyStartUpData() const
-{
-	UAssetManager::GetStreamableManager().RequestAsyncLoad(
-		CharacterStartUpData.ToSoftObjectPath(),
-		FStreamableDelegate::CreateLambda([this]()
-		{
-			if (UDataAsset_StartupDataBase* LoadedData = CharacterStartUpData.LoadSynchronous())
-			{
-				if (UKKAbilitySystemComponent* KKAbilitySystemComponent =
-					Cast<UKKAbilitySystemComponent>(AbilitySystemComponent))
-				{
-					LoadedData->GiveToAbilitySystemComponent(KKAbilitySystemComponent, Level);
-				}
-			}
-		})
-	);
 }

@@ -25,10 +25,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-
-	// ~Begin APawn Interface.
-	virtual void PossessedBy(AController* NewController) override;
-	// ~End APawn Interface
+	virtual void InitAbilityActorInfo() override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UWidgetComponent> HealthBar;
@@ -42,7 +39,7 @@ protected:
 	//~ End WidgetController Delegates
 
 private:
-	void InitEnemyStartUpData() const;
+	void BindHealthChangeCallbacks();
 
 	UPROPERTY(EditAnywhere)
 	int32 Level = 1;
