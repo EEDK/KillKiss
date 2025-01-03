@@ -5,6 +5,7 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
+#include "KKGameplayTags.h"
 #include "Actor/KKProjectile.h"
 #include "Interface/CombatInterface.h"
 
@@ -20,15 +21,7 @@ void UKKProjectileSpell::SpawnFireBall()
 {
 	if (ICombatInterface* CombatInterface = Cast<ICombatInterface>(GetAvatarActorFromActorInfo()))
 	{
-		FVector SocketLocation;
-		if (ComboCount % 2 == 1)
-		{
-			SocketLocation = CombatInterface->GetLeftHandSocket();
-		}
-		else
-		{
-			SocketLocation = CombatInterface->GetRightHandSocket();
-		}
+		const FVector SocketLocation = CombatInterface->GetLeftHandSocket();
 
 		FTransform SpawnTransform;
 		SpawnTransform.SetLocation(SocketLocation);
@@ -46,6 +39,10 @@ void UKKProjectileSpell::SpawnFireBall()
 			UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetAvatarActorFromActorInfo());
 		const FGameplayEffectSpecHandle SpecHandle =
 			SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), SourceASC->MakeEffectContext());
+
+		const float ScaledDamage = Damage.GetValueAtLevel(10);
+
+		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, KKGameplayTags::Damage, ScaledDamage);
 
 		Projectile->DamageEffectSpecHandle = SpecHandle;
 

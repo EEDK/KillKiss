@@ -20,11 +20,16 @@ protected:
 	                             const FGameplayAbilityActivationInfo ActivationInfo,
 	                             const FGameplayEventData* TriggerEventData) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TSubclassOf<AKKProjectile> ProjectileClass;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TSubclassOf<UGameplayEffect> DamageEffectClass;
+
+	// 스킬의 Damage 속성을 저장하는 ScalableFloat
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	FScalableFloat Damage;
+
 
 	UFUNCTION(BlueprintCallable, Category = "Projectile")
 	void SpawnFireBall();

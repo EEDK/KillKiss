@@ -39,6 +39,10 @@ namespace KKGameplayTags
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_State_AttributeMenuOpen);
 	//~Status Tags
 
+	// Meta Tag
+	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage);
+	//~Meta Tag
+
 	//Attribute Tags
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Primary_Strength);
 	KILLKISS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attributes_Primary_Intelligence);

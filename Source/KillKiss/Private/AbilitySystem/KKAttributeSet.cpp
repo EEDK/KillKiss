@@ -7,6 +7,7 @@
 #include "GameplayEffectExtension.h"
 #include "KKDebugHelper.h"
 #include "KKGameplayTags.h"
+#include "Controllers/KKPlayerController.h"
 #include "GameFramework/Character.h"
 
 UKKAttributeSet::UKKAttributeSet()
@@ -82,6 +83,8 @@ void UKKAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallback
 				TagContainer.AddTag(KKGameplayTags::Shared_Ability_HitPause);
 				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
 			}
+
+			ShowFloatingText(Props, LocalIncomingDamage);
 		}
 	}
 }
@@ -118,5 +121,16 @@ void UKKAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& 
 		Props.TargetController = Data.Target.AbilityActorInfo->PlayerController.Get();
 		Props.TargetCharacter = Cast<ACharacter>(Props.TargetAvatarActor);
 		Props.TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Props.TargetAvatarActor);
+	}
+}
+
+void UKKAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage) const
+{
+	if (Props.SourceCharacter != Props.TargetCharacter)
+	{
+		if (AKKPlayerController* PC = Cast<AKKPlayerController>(Props.SourceController))
+		{
+			PC->ShowDamageNumber(Damage, Props.TargetCharacter);
+		}
 	}
 }

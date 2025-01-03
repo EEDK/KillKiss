@@ -38,6 +38,10 @@ namespace KKGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_State_AttributeMenuOpen, "Player.State.AttributeMenuOpen")
 	//~Status Tags
 
+	// Meta Tag
+	UE_DEFINE_GAMEPLAY_TAG(Damage, "Damage")
+	//~Meta Tag
+
 	//Attribute Tags
 	UE_DEFINE_GAMEPLAY_TAG(Attributes_Primary_Strength, "Attributes.Primary.Strength")
 	UE_DEFINE_GAMEPLAY_TAG(Attributes_Primary_Intelligence, "Attributes.Primary.Intelligence")

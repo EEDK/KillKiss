@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "KKPlayerController.generated.h"
 
+class UDamageTextComponent;
 /**
  * 
  */
@@ -13,5 +14,12 @@ UCLASS()
 class KILLKISS_API AKKPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
+public:
+	UFUNCTION()
+	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter);
+
+private:
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UDamageTextComponent> DamageTextComponentClass;
 };
