@@ -126,8 +126,8 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	// 가드 여부 확인 (치명타가 안터졌을경우에만)
 	if (!bCritical)
 	{
-		const float BlockChance = TargetArmor * 0.33f;
-		const bool bBlock = FMath::RandRange(1, 100) >= BlockChance;
+		const float BlockChance = TargetArmor * 0.5f;
+		const bool bBlock = FMath::RandRange(1, 100) <= BlockChance;
 
 		Damage = bBlock ? Damage / 2.f : Damage;
 		UKKAbilitySystemLibrary::SetIsBlockedHit(EffectContextHandle, bBlock);
