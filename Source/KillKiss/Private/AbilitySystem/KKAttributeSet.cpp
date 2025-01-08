@@ -7,6 +7,7 @@
 #include "GameplayEffectExtension.h"
 #include "KKDebugHelper.h"
 #include "KKGameplayTags.h"
+#include "AbilitySystem/KKAbilitySystemLibrary.h"
 #include "Controllers/KKPlayerController.h"
 #include "GameFramework/Character.h"
 
@@ -83,8 +84,10 @@ void UKKAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallback
 				TagContainer.AddTag(KKGameplayTags::Shared_Ability_HitPause);
 				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
 			}
+			const bool bBlockedHit = UKKAbilitySystemLibrary::IsBlockedHit(Props.EffectContextHandle);
+			const bool bCriticalHit = UKKAbilitySystemLibrary::IsCriticalHit(Props.EffectContextHandle);
 
-			ShowFloatingText(Props, LocalIncomingDamage);
+			ShowFloatingText(Props, LocalIncomingDamage, bBlockedHit, bCriticalHit);
 		}
 	}
 }
@@ -124,13 +127,14 @@ void UKKAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& 
 	}
 }
 
-void UKKAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage) const
+void UKKAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage, bool bBlockedHit,
+                                       bool bCriticalHit) const
 {
 	if (Props.SourceCharacter != Props.TargetCharacter)
 	{
 		if (AKKPlayerController* PC = Cast<AKKPlayerController>(Props.SourceController))
 		{
-			PC->ShowDamageNumber(Damage, Props.TargetCharacter);
+			PC->ShowDamageNumber(Damage, Props.TargetCharacter, bBlockedHit, bCriticalHit);
 		}
 	}
 }

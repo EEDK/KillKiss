@@ -17,7 +17,7 @@ class KILLKISS_API AKKPlayerController : public APlayerController
 
 public:
 	UFUNCTION()
-	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter);
+	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter, bool bBlockedHit, bool bCriticalHit);
 
 private:
 	UPROPERTY(EditDefaultsOnly)
