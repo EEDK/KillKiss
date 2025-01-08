@@ -62,6 +62,7 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	FAggregatorEvaluateParameters EvaluationParameters;
 	EvaluationParameters.SourceTags = SourceTags;
 	EvaluationParameters.TargetTags = TargetTags;
+	FGameplayEffectContextHandle EffectContextHandle = Spec.GetContext();
 
 	// Set by Caller를 통한 Damage 값 가져오기
 	float Damage = Spec.GetSetByCallerMagnitude(KKGameplayTags::Damage);
@@ -88,6 +89,7 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 
 	Damage *= (100 - EffectiveArmor * EffectiveArmorCoefficient) / 100.f;
 
+
 	// Critical 구현
 	float SourceCriticalHitChance = 0.f;
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().CriticalHitChanceDef,
@@ -111,16 +113,25 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 		CoefficientsTable->FindCurve(FName("CriticalHitResistance"), FString());
 	const float CriticalHitResistanceCurveCoefficient
 		= CriticalHitResistanceCurve->Eval(SourceCombatInterface->GetPlayerLevel());
-	
+
 	const float EffectiveCriticalHitChance
 		= SourceCriticalHitChance - TargetCriticalResistance * CriticalHitResistanceCurveCoefficient;
 
 	const bool bCritical = FMath::RandRange(1, 100) < EffectiveCriticalHitChance;
-	
-	FGameplayEffectContextHandle EffectContextHandle = Spec.GetContext();
+
 	UKKAbilitySystemLibrary::SetIsCriticalHit(EffectContextHandle, bCritical);
 
 	Damage = bCritical ? Damage * (SourceCriticalHitDamage / 100.f) : Damage;
+
+	// 가드 여부 확인 (치명타가 안터졌을경우에만)
+	if (!bCritical)
+	{
+		const float BlockChance = TargetArmor * 0.33f;
+		const bool bBlock = FMath::RandRange(1, 100) >= BlockChance;
+
+		Damage = bBlock ? Damage / 2.f : Damage;
+		UKKAbilitySystemLibrary::SetIsBlockedHit(EffectContextHandle, bBlock);
+	}
 
 	const FGameplayModifierEvaluatedData EvaluatedData(UKKAttributeSet::GetIncomingDamageAttribute(),
 	                                                   EGameplayModOp::Additive, Damage);
