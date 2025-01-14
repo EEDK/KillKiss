@@ -12,6 +12,14 @@ class UDataAsset_StartupDataBase;
 class UGameplayEffect;
 class UAttributeSet;
 
+UENUM(BlueprintType)
+enum class ECharacterClass : uint8
+{
+	Elementalist,
+	Warrior,
+	Ranger
+};
+
 UCLASS(Abstract)
 class KILLKISS_API AKKCharacterBase : public ACharacter, public IAbilitySystemInterface, public ICombatInterface
 {
@@ -35,6 +43,13 @@ protected:
 	//~Set Attributes Data
 
 	virtual void InitAbilityActorInfo();
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
+	int32 Level = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
+	ECharacterClass CharacterClass = ECharacterClass::Elementalist;
 
 private:
 	UPROPERTY(EditDefaultsOnly)

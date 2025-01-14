@@ -4,12 +4,16 @@
 #include "Character/Enemy/KKEnemyCharacter.h"
 
 #include "KKDebugHelper.h"
+#include "KKGameplayTags.h"
 #include "AbilitySystem/KKAbilitySystemComponent.h"
 #include "AbilitySystem/KKAttributeSet.h"
-#include "Components/CapsuleComponent.h"
+#include "AI/KKAIController.h"
+#include "BehaviorTree/BehaviorTree.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "Components/WidgetComponent.h"
 #include "DataAssets/StartupData/DataAsset_StartupDataBase.h"
 #include "Engine/AssetManager.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "UI/KKUserWidget.h"
 
 AKKEnemyCharacter::AKKEnemyCharacter()
@@ -31,6 +35,18 @@ void AKKEnemyCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	InitAbilityActorInfo();
+}
+
+void AKKEnemyCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	KKAIController = Cast<AKKAIController>(NewController);
+	KKAIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
+	KKAIController->RunBehaviorTree(BehaviorTree);
+	KKAIController->GetBlackboardComponent()->SetValueAsBool(FName("HitReacting"), false);
+	KKAIController->GetBlackboardComponent()->SetValueAsBool(FName("RangedAttacker"),
+	                                                         CharacterClass != ECharacterClass::Warrior);
 }
 
 void AKKEnemyCharacter::InitAbilityActorInfo()
@@ -81,7 +97,20 @@ void AKKEnemyCharacter::BindHealthChangeCallbacks()
 				OnMaxHealthChanged.Broadcast(Data.NewValue);
 			}
 		);
+
+		AbilitySystemComponent->RegisterGameplayTagEvent(
+			                        KKGameplayTags::Shared_Ability_HitPause).
+		                        AddUObject(this, &AKKEnemyCharacter::HitReactTagChanged);
+
 		OnHealthChanged.Broadcast(KKAttributeSet->GetCurrentHealth());
 		OnMaxHealthChanged.Broadcast(KKAttributeSet->GetMaxHealth());
 	}
+}
+
+void AKKEnemyCharacter::HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
+{
+	bHitReacting = NewCount > 0;
+
+	GetCharacterMovement()->MaxWalkSpeed = bHitReacting ? BaseWalkSpeed / 2.f : BaseWalkSpeed;
+	KKAIController->GetBlackboardComponent()->SetValueAsBool(FName("HitReacting"), bHitReacting);
 }

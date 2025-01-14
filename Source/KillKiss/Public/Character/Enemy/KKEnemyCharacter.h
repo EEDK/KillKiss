@@ -3,10 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "Character/KKCharacterBase.h"
 #include "UI/WidgetController/OverlayWidgetController.h"
 #include "KKEnemyCharacter.generated.h"
 
+class AKKAIController;
+class UBehaviorTree;
 class UWidgetComponent;
 
 /**
@@ -23,12 +26,30 @@ public:
 	virtual int32 GetPlayerLevel() override;
 	// ~End IAbilitySystemInterface Interface
 
+	void HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCount);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Combat")
+	bool bHitReacting = false;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Combat")
+	float BaseWalkSpeed = 250.f;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float LifeSpan = 5.f;
+
 protected:
 	virtual void BeginPlay() override;
+	virtual void PossessedBy(AController* NewController) override;
 	virtual void InitAbilityActorInfo() override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UWidgetComponent> HealthBar;
+
+	UPROPERTY(EditAnywhere, Category = "AI")
+	TObjectPtr<UBehaviorTree> BehaviorTree;
+
+	UPROPERTY()
+	TObjectPtr<AKKAIController> KKAIController;
 
 	//~ Begin WidgetController Delegates
 	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
@@ -40,7 +61,4 @@ protected:
 
 private:
 	void BindHealthChangeCallbacks();
-
-	UPROPERTY(EditAnywhere)
-	int32 Level = 1;
 };
